@@ -4,12 +4,13 @@ import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
 import android.util.Log
 import com.quyunshuo.imdemomember.databinding.ActivityMainBinding
-import com.tencent.imsdk.v2.V2TIMCallback
-import com.tencent.imsdk.v2.V2TIMManager
+import com.tencent.imsdk.v2.*
 
 class MainActivity : AppCompatActivity() {
 
     private val mBinding by lazy { ActivityMainBinding.inflate(layoutInflater) }
+
+    private val stringBuffer by lazy { StringBuffer() }
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
@@ -25,11 +26,13 @@ class MainActivity : AppCompatActivity() {
                 GenerateTestUserSig.genTestUserSig("2001"),
                 object : V2TIMCallback {
                     override fun onSuccess() {
-                        Log.d("qqq", "onSuccess: 2001")
+                        showMsg(" ======>> 登录成功")
+                        setSimpleMsgListener()
+                        setGroupListener()
                     }
 
                     override fun onError(p0: Int, p1: String?) {
-                        Log.d("qqq", "onError: 2001")
+                        showMsg(" ======>> 登录失败: code: $p0 msg: $p1")
                     }
                 })
         }
@@ -43,12 +46,61 @@ class MainActivity : AppCompatActivity() {
     private fun joinGroup(groupId: String, msg: String) {
         V2TIMManager.getInstance().joinGroup(groupId, msg, object : V2TIMCallback {
             override fun onSuccess() {
-                Log.d("qqq", "onSuccess: 加群成功")
+                showMsg(" ======>> 加群成功")
             }
 
             override fun onError(p0: Int, p1: String?) {
-                Log.d("qqq", "onError: 加群失败 code: $p0 msg: $p1")
+                showMsg(" ======>> 加群失败: code: $p0 msg: $p1")
             }
         })
+    }
+
+    /**
+     * 设置简单消息监听
+     */
+    private fun setSimpleMsgListener() {
+        V2TIMManager.getInstance()
+            .addSimpleMsgListener(object : V2TIMSimpleMsgListener() {
+                override fun onRecvGroupTextMessage(
+                    msgID: String?,
+                    groupID: String?,
+                    sender: V2TIMGroupMemberInfo?,
+                    text: String?
+                ) {
+                    super.onRecvGroupTextMessage(msgID, groupID, sender, text)
+                    showMsg(" ======>> 接受到消息: msgID: $msgID groupID: $groupID text: $text")
+                }
+            })
+    }
+
+    /**
+     * 设置群组监听
+     */
+    private fun setGroupListener() {
+        V2TIMManager.getInstance().setGroupListener(object : V2TIMGroupListener() {
+            override fun onMemberEnter(
+                groupID: String?,
+                memberList: MutableList<V2TIMGroupMemberInfo>?
+            ) {
+                super.onMemberEnter(groupID, memberList)
+                showMsg(" ======>> 有新成员加入: groupID: $groupID")
+            }
+
+            override fun onMemberLeave(
+                groupID: String?,
+                member: V2TIMGroupMemberInfo?
+            ) {
+                super.onMemberLeave(groupID, member)
+                showMsg(" ======>> 有成员离开群: groupID: $groupID member: ${member.toString()}")
+            }
+        })
+    }
+
+    /**
+     * 显示信息
+     */
+    private fun showMsg(msg: String) {
+        stringBuffer.append(Utils.getTime() + msg + "\n")
+        mBinding.msgTv.text = stringBuffer.toString()
     }
 }
