@@ -15,11 +15,29 @@
         app:layout_constraintRight_toRightOf="parent"
         app:layout_constraintTop_toTopOf="parent" />
 
+    <Button
+        android:id="@+id/createGroupBtn"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="创建群组"
+        app:layout_constraintLeft_toLeftOf="parent"
+        app:layout_constraintRight_toRightOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/lordLoginBtn" />
+
+    <Button
+        android:id="@+id/dissolveGroupBtn"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="解散群组"
+        app:layout_constraintLeft_toLeftOf="parent"
+        app:layout_constraintRight_toRightOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/createGroupBtn" />
+
     <TextView
         android:id="@+id/msgTv"
         android:layout_width="match_parent"
         android:layout_height="0dp"
         app:layout_constraintBottom_toBottomOf="parent"
-        app:layout_constraintTop_toBottomOf="@id/lordLoginBtn" />
+        app:layout_constraintTop_toBottomOf="@id/dissolveGroupBtn" />
 
 </androidx.constraintlayout.widget.ConstraintLayout>
