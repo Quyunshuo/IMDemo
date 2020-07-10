@@ -37,6 +37,8 @@ class MainActivity : AppCompatActivity() {
                 })
         }
         mBinding.joinGroupBtn.setOnClickListener { joinGroup("100001", "测试加群") }
+        mBinding.quitGroupBtn.setOnClickListener { quitGroup("100001") }
+        mBinding.sendMsgBtn.setOnClickListener { sendMsg("我是群成员1号", "100001") }
     }
 
     /**
@@ -51,6 +53,21 @@ class MainActivity : AppCompatActivity() {
 
             override fun onError(p0: Int, p1: String?) {
                 showMsg(" ======>> 加群失败: code: $p0 msg: $p1")
+            }
+        })
+    }
+
+    /**
+     * 退群
+     */
+    private fun quitGroup(groupId: String) {
+        V2TIMManager.getInstance().quitGroup(groupId, object : V2TIMCallback {
+            override fun onSuccess() {
+                showMsg(" ======>> 退群成功")
+            }
+
+            override fun onError(p0: Int, p1: String?) {
+                showMsg(" ======>> 退群失败: code: $p0 msg: $p1")
             }
         })
     }
@@ -94,6 +111,23 @@ class MainActivity : AppCompatActivity() {
                 showMsg(" ======>> 有成员离开群: groupID: $groupID member: ${member.toString()}")
             }
         })
+    }
+
+    /**
+     * 发送群消息
+     */
+    private fun sendMsg(msgText: String, groupId: String) {
+        V2TIMManager.getInstance()
+            .sendGroupTextMessage(msgText, groupId, V2TIMMessage.V2TIM_PRIORITY_HIGH,
+                object : V2TIMValueCallback<V2TIMMessage> {
+                    override fun onSuccess(p0: V2TIMMessage?) {
+                        showMsg(" ======>> 群消息发送成功")
+                    }
+
+                    override fun onError(p0: Int, p1: String?) {
+                        showMsg(" ======>> 群消息发送失败: code: $p0 msg: $p1")
+                    }
+                })
     }
 
     /**

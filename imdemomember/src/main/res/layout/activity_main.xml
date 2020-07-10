@@ -24,6 +24,24 @@
         app:layout_constraintRight_toRightOf="parent"
         app:layout_constraintTop_toBottomOf="@id/member1LoginBtn" />
 
+    <Button
+        android:id="@+id/quitGroupBtn"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="退出群聊"
+        app:layout_constraintLeft_toLeftOf="parent"
+        app:layout_constraintRight_toRightOf="parent"
+        app:layout_constraintTop_toBottomOf="@id/joinGroupBtn" />
+
+    <Button
+        android:id="@+id/sendMsgBtn"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="发送群消息"
+        app:layout_constraintLeft_toLeftOf="parent"
+        app:layout_constraintRight_toRightOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/quitGroupBtn" />
+
     <TextView
         android:id="@+id/msgTv"
         android:layout_width="match_parent"
@@ -31,6 +49,6 @@
         android:layout_margin="10dp"
         android:textSize="15sp"
         app:layout_constraintBottom_toBottomOf="parent"
-        app:layout_constraintTop_toBottomOf="@id/joinGroupBtn" />
+        app:layout_constraintTop_toBottomOf="@id/sendMsgBtn" />
 
 </androidx.constraintlayout.widget.ConstraintLayout>
