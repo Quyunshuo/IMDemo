@@ -1,9 +1,9 @@
-package com.quyunshuo.imdemo
+package com.quyunshuo.imdemomember
 
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
 import android.util.Log
-import com.quyunshuo.imdemo.databinding.ActivityMainBinding
+import com.quyunshuo.imdemomember.databinding.ActivityMainBinding
 import com.tencent.imsdk.v2.V2TIMCallback
 import com.tencent.imsdk.v2.V2TIMManager
 
@@ -19,17 +19,17 @@ class MainActivity : AppCompatActivity() {
 
     private fun initView() {
         // 群主
-        mBinding.lordLoginBtn.setOnClickListener {
+        mBinding.member1LoginBtn.setOnClickListener {
             V2TIMManager.getInstance().login(
-                "1001",
-                GenerateTestUserSig.genTestUserSig("1001"),
+                "2001",
+                GenerateTestUserSig.genTestUserSig("2001"),
                 object : V2TIMCallback {
                     override fun onSuccess() {
-                        Log.d("qqq", "onSuccess: 1001")
+                        Log.d("qqq", "onSuccess: 2001")
                     }
 
                     override fun onError(p0: Int, p1: String?) {
-                        Log.d("qqq", "onError: 1001")
+                        Log.d("qqq", "onError: 2001")
                     }
                 })
         }

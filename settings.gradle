@@ -1,2 +1,3 @@
+include ':imdemomember'
 include ':app'
 rootProject.name = "IMDemo"

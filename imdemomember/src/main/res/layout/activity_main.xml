@@ -7,10 +7,10 @@
     tools:context=".MainActivity">
 
     <Button
-        android:id="@+id/lordLoginBtn"
+        android:id="@+id/member1LoginBtn"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:text="群主登录"
+        android:text="成员1登录"
         app:layout_constraintLeft_toLeftOf="parent"
         app:layout_constraintRight_toRightOf="parent"
         app:layout_constraintTop_toTopOf="parent" />
@@ -20,6 +20,5 @@
         android:layout_width="match_parent"
         android:layout_height="0dp"
         app:layout_constraintBottom_toBottomOf="parent"
-        app:layout_constraintTop_toBottomOf="@id/lordLoginBtn" />
-
+        app:layout_constraintTop_toBottomOf="@id/member1LoginBtn" />
 </androidx.constraintlayout.widget.ConstraintLayout>

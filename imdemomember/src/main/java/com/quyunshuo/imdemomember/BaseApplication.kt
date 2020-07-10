@@ -1,8 +1,7 @@
-package com.quyunshuo.imdemo
-
+package com.quyunshuo.imdemomember
 import android.app.Application
 import android.util.Log
-import com.quyunshuo.imdemo.GenerateTestUserSig.SDKAPPID
+import com.quyunshuo.imdemomember.GenerateTestUserSig.SDKAPPID
 import com.tencent.imsdk.v2.V2TIMManager
 import com.tencent.imsdk.v2.V2TIMSDKConfig
 import com.tencent.imsdk.v2.V2TIMSDKListener
@@ -21,17 +20,17 @@ class BaseApplication : Application() {
 
             // 正在连接到腾讯云服务器
             override fun onConnecting() {
-                Log.d("qqq", "onConnecting: 群主")
+                Log.d("qqq", "onConnecting: 成员")
             }
 
             // 已经成功连接到腾讯云服务器
             override fun onConnectSuccess() {
-                Log.d("qqq", "onConnectSuccess: 群主")
+                Log.d("qqq", "onConnectSuccess: 成员")
             }
 
             // 连接腾讯云服务器失败
             override fun onConnectFailed(code: Int, error: String?) {
-                Log.d("qqq", "onConnectFailed: 群主")
+                Log.d("qqq", "onConnectFailed: 成员")
             }
         })
     }
